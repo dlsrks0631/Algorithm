@@ -26,7 +26,23 @@ def quick_sort(array, start, end):
     # 분할 이후 왼쪽 부분과 오른쪽 부분에서 각각 정렬 수행
     quick_sort(array, start, right-1)
     quick_sort(array, right + 1, end)
-    
 
 quick_sort(array, 0, len(array)-1)
-print(array)
+
+
+# 파이썬의 장점을 살린 퀵 정렬
+
+def quick_sort_python(array):
+    # 리스트가 하나 이하의 원소만을 담고 있다면 종료
+    if len(array) <= 1:
+        return array
+    
+    pivot = array[0] # 피벗은 첫 번째 원소
+    tail = array[1:] # 피벗을 제외한 리스트
+
+    left_side = [x for x in tail if x <= pivot] # 분할된 왼쪽 부분
+    right_side = [x for x in tail if x > pivot] # 분할된 오른쪽 부분
+
+    return quick_sort_python(left_side) + [pivot] + quick_sort_python(right_side)
+
+print(quick_sort_python(array))
